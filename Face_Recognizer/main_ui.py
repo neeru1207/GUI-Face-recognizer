@@ -1,16 +1,15 @@
 import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import filedialog, messagebox
-from cnn_model import CNN
-from build_positive import BuildPositiveFaceDataset
-from detect_face import DetectFace
-from create_test_case import CreateTestSet
-from build_negative import BuildNegativeDataset
-from load_cnn_from_file import LoadCnn
+from Face_Recognizer.cnn_model import CNN
+from Face_Recognizer.build_positive import BuildPositiveFaceDataset
+from Face_Recognizer.detect_face import DetectFace
+from Face_Recognizer.create_test_case import CreateTestSet
+from Face_Recognizer.build_negative import BuildNegativeDataset
+from Face_Recognizer.load_cnn_from_file import LoadCnn
 from PIL import ImageTk, Image
 import shutil
 names = set()
-
 
 class MainUI(tk.Tk):
 
@@ -209,6 +208,6 @@ class PageFour(tk.Frame):
     def openwebcam(self):
         DetectFace(self.controller.active_name, self.controller.CNNobj)
 
-if __name__ == "__main__":
-    app = MainUI()
-    app.mainloop()
+
+app = MainUI()
+app.mainloop()

@@ -1,31 +1,25 @@
-from keras.models import Sequential
-from keras.layers import Conv2D
-from keras.layers import MaxPooling2D
-from keras.layers import Flatten
-from keras.layers import Dense
-from keras.preprocessing.image import ImageDataGenerator
-from keras.preprocessing import image
+import tensorflow as tf
 import cv2
 import numpy as np
 
 class CNN:
     def __init__(self):
-        self.classifier = Sequential()
-        self.classifier.add(Conv2D(32, (3, 3), input_shape=(64, 64, 3), activation='relu'))
-        self.classifier.add(MaxPooling2D(pool_size=(2, 2)))
-        self.classifier.add(Conv2D(32, (3, 3), activation='relu'))
-        self.classifier.add(MaxPooling2D(pool_size=(2, 2)))
-        self.classifier.add(Flatten())
-        self.classifier.add(Dense(units=128, activation='relu'))
-        self.classifier.add(Dense(units=1, activation='sigmoid'))
-        self.train_datagen = ImageDataGenerator(rescale=1./255,
+        self.classifier = tf.keras.models.Sequential()
+        self.classifier.add(tf.keras.layers.Conv2D(32, (3, 3), input_shape=(64, 64, 3), activation='relu'))
+        self.classifier.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
+        self.classifier.add(tf.keras.layers.Conv2D(32, (3, 3), activation='relu'))
+        self.classifier.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
+        self.classifier.add(tf.keras.layers.Flatten())
+        self.classifier.add(tf.keras.layers.Dense(units=128, activation='relu'))
+        self.classifier.add(tf.keras.layers.Dense(units=1, activation='sigmoid'))
+        self.train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255,
                                    shear_range=0.2,
                                    zoom_range=0.2,
                                    horizontal_flip=True)
-        self.test_datagen = ImageDataGenerator(rescale=1./255)
+        self.test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
         self.training_set = None
         self.test_set = None
-        self.predict_datagen = ImageDataGenerator(rescale=1. / 255)
+        self.predict_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255)
         self.pers_name = None
 
     def create_train_test(self):
@@ -57,8 +51,8 @@ class CNN:
                          nb_val_samples=100)
 
     def make_prediction(self):
-        img1 = image.load_img('temimg.jpg', target_size=(64, 64))
-        img1 = image.img_to_array(img1)
+        img1 = tf.keras.preprocessing.image.load_img('temimg.jpg', target_size=(64, 64))
+        img1 = tf.keras.preprocessing.image.img_to_array(img1)
         img1 = cv2.resize(img1, (64, 64))
         img1 = np.expand_dims(img1, axis=0)
         result = self.classifier.predict(img1)
