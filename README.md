@@ -1,5 +1,8 @@
 # GUI Face recognizer
 A GUI based webcam realtime video Face Recognizer coded in Python3 for Windows. 
+# Screenshots
+!["Main UI"](https://github.com/neeru1207/GUI-Face-recognizer/blob/master/Face_Recognizer/MainUI.png)
+!["Face Recognition"](https://github.com/neeru1207/GUI-Face-recognizer/blob/master/Face_Recognizer/Face_Recognizer.png)
 ## Usage:
 ### Required download:
 * Download the faces.tar file from [here](http://www.vision.caltech.edu/Image_Datasets/faces).
